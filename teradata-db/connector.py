@@ -6,15 +6,16 @@
 
 from connectors.core.connector import Connector, get_logger, ConnectorError
 from .operations import check_health, operations
-logger = get_logger('fresh-service-desk-msp')
+logger = get_logger('teradata-db')
 
 
-class FreshService(Connector):
+class TeraDataDb(Connector):
 
     def execute(self, config, operation, params, **kwargs):
         try:
-            operation = operations.get(operation)
-            return operation(config, params, **kwargs)
+            action = operations.get(operation)
+            result = action(config, params)
+            return result
         except Exception as err:
             logger.error(str(err))
             raise ConnectorError(str(err))
