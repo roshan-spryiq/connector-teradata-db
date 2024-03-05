@@ -1,99 +1,127 @@
 {
-	"name": "teradata-db",
-	"version": "1.0.0",
-	"label": "Teradata DB",
-	"description": "",
-	"publisher": "spryIQ.co",
-	"icon_small_name": "small.png",
-	"icon_large_name": "large.png",
-	"cs_compatible": true,
-	"cs_approved": false,
-	"category": "Database",
-	"help_online": "https://github.com/jitesh-spryiq/connector-teradata/blob/develop/docs/TeraDataConnectorDoc.md",
-	"configuration": {
-		"fields": [
-			{
-				"title": "Server URL",
-				"type": "text",
-				"name": "server_url",
-				"required": true,
-				"visible": true,
-				"editable": true,
-				"value": "",
-				"tooltip": ""
-			},
-			{
-				"title": "Authentiction Type",
-				"type": "select",
-				"name": "authentictionType",
-				"required": true,
-				"visible": true,
-				"editable": true,
-				"value": null,
+    "name": "tearadata-db",
+    "version": "1.0.0",
+    "label": "Teradata DB",
+    "description": "",
+    "publisher": "spryIQ.co",
+    "icon_small_name": "small.png",
+    "icon_large_name": "large.png",
+    "cs_compatible": true,
+    "cs_approved": false,
+    "category": "Database",
+    "help_online": "https://github.com/jitesh-spryiq/connector-teradata-db/blob/develop/docs/TeraDataConnectorDoc.md",
+    "configuration": {
+        "fields": [
+            {
+                "title": "Host Name",
+                "type": "text",
+                "description": "",
+                "tooltip": "",
+                "name": "host_name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "value": "",
+                "placeholder": ""
+            },
+            {
+                "title": "System Name",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "system_name",
+                "tooltip": "",
+                "value": "",
+                "description": ""
+            },
+            {
+                "title": "Select Authentication",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "name": "select_authentication",
+                "value": "Basic Authentication",
+                "tooltip": "",
+                "description": "",
 				"options": [
 					"Basic Authentication",
-					"JWT Authentication"
+					"JWT Authentication"					
 				],
-              "onchange": {
-                        "Basic Authentication": [
-                            {
-                                "title": "Basic Authentication",
-                                "description": "Specify the attachment ID of the file in the FortiSOAR Attachments module.",
-                                "required": false,
-                                "editable": true,
-                                "visible": true,
-                                "type": "text",
-                                "name": "value",
-                                "placeholder": "e.g. 43f1ecba-a90d-4078-8372-9c4f81d186b8",
-                                "value": ""
-                            }
-                        ],
-                        "JWT Authentication": [
-                            {
-                                "title": "JWT Authentication",
-                                "description": "Specify the File IRI of the file in the FortiSOAR Attachments module.",
-                                "required": false,
-                                "editable": true,
-                                "visible": true,
-                                "type": "text",
-                                "name": "value",
-                                "placeholder": "e.g. ",
-                                "value": ""
-                            }
-                        ]
-			}
-		]
-	},
-	"operations": [
-		{
-			"title": "Get Origin Query",
-			"operation": "get_origin_query",
-			"description": "Report back the originating ASN and ASN name for the specific CIDR.",
-			"annotation": "get_origin_query",
-			"category": "investigation",
-			"parameters": [
-				{
-					"title": "IP Address",
-					"type": "text",
-					"name": "ip_address",
-					"required": true,
-					"visible": true,
-					"editable": true,
-					"value": "",
-					"tooltip": "Specify the IP address."
+				"onchange": {
+					"Basic Authentication": [
+						{
+							"title": "DB User ",
+							"description": "",
+							"required": false,
+							"editable": true,
+							"visible": true,
+							"type": "text",
+							"name": "value",
+							"value": ""
+						},
+						{
+							"title": "DB Password ",
+							"description": "",
+							"required": false,
+							"editable": true,
+							"visible": true,
+							"type": "password",
+							"name": "value",
+							"value": ""
+						}
+					],
+					"JWT Authentication": [
+						{
+							"title": "JWT Token",
+							"description": "",
+							"required": false,
+							"editable": true,
+							"visible": true,
+							"type": "password",
+							"name": "value",
+							"value": ""
+						}
+					]
 				}
-			],
-			"output_schema": [
-				{
-					"asname_short": "",
-					"prefix": "",
-					"asn": "",
-					"asname_long": "",
-					"geo": "",
-					"nic": ""
-				}
-			],
-			"open": false
-		}
-	]
+            }
+        ]
+    },
+    "operations": [
+        {
+            "title": "Get Indicators For Latest Feed ",
+            "operation": "get_indicators_for_latest_feed",
+            "description": "Retrieves a list of all indicators from openphish feed for last 15 minutes.",
+            "annotation": "get_indicators_for_latest_feed",
+            "category": "investigation",
+            "parameters":[]
+		},
+        
+        {
+            "title": "Get all Query",
+            "operation": "get_indicators_for_24h_feed",
+            "description": "Retrieves a list of all indicators from openphish Feed for last 24 hours.",
+            "annotation": "get_indicators_for_24h_feed",
+            "category": "investigation",
+            "parameters":[],
+            "output_schema": [
+                {
+                    "sector": "",
+                    "url": "",
+                    "ip": "",
+                    "brand": "",
+                    "isotime": "",
+                    "asn_name": "",
+                    "discover_time": "",
+                    "asn": "",
+                    "family_id": "",
+                    "host": "",
+                    "country_code": "",
+                    "tld": "",
+                    "country_name": ""
+                }
+            ]
+        }
+    ]
 }
