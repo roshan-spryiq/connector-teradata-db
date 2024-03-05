@@ -1,0 +1,99 @@
+{
+	"name": "teradata-db",
+	"version": "1.0.0",
+	"label": "Teradata DB",
+	"description": "",
+	"publisher": "spryIQ.co",
+	"icon_small_name": "Terradata_Small.png",
+	"icon_large_name": "Terradata_Large.png",
+	"cs_compatible": true,
+	"cs_approved": false,
+	"category": "Database",
+	"help_online": "https://github.com/jitesh-spryiq/connector-teradata/blob/develop/docs/TeraDataConnectorDoc.md",
+	"configuration": {
+		"fields": [
+			{
+				"title": "Server URL",
+				"type": "text",
+				"name": "server_url",
+				"required": true,
+				"visible": true,
+				"editable": true,
+				"value": "",
+				"tooltip": ""
+			},
+			{
+				"title": "Authentiction Type",
+				"type": "select",
+				"name": "authentictionType",
+				"required": true,
+				"visible": true,
+				"editable": true,
+				"value": null,
+				"options": [
+					"Basic Authentication",
+					"JWT Authentication"
+				],
+              "onchange": {
+                        "Basic Authentication": [
+                            {
+                                "title": "Basic Authentication",
+                                "description": "Specify the attachment ID of the file in the FortiSOAR Attachments module.",
+                                "required": false,
+                                "editable": true,
+                                "visible": true,
+                                "type": "text",
+                                "name": "value",
+                                "placeholder": "e.g. 43f1ecba-a90d-4078-8372-9c4f81d186b8",
+                                "value": ""
+                            }
+                        ],
+                        "JWT Authentication": [
+                            {
+                                "title": "JWT Authentication",
+                                "description": "Specify the File IRI of the file in the FortiSOAR Attachments module.",
+                                "required": false,
+                                "editable": true,
+                                "visible": true,
+                                "type": "text",
+                                "name": "value",
+                                "placeholder": "e.g. ",
+                                "value": ""
+                            }
+                        ]
+			}
+		]
+	},
+	"operations": [
+		{
+			"title": "Get Origin Query",
+			"operation": "get_origin_query",
+			"description": "Report back the originating ASN and ASN name for the specific CIDR.",
+			"annotation": "get_origin_query",
+			"category": "investigation",
+			"parameters": [
+				{
+					"title": "IP Address",
+					"type": "text",
+					"name": "ip_address",
+					"required": true,
+					"visible": true,
+					"editable": true,
+					"value": "",
+					"tooltip": "Specify the IP address."
+				}
+			],
+			"output_schema": [
+				{
+					"asname_short": "",
+					"prefix": "",
+					"asn": "",
+					"asname_long": "",
+					"geo": "",
+					"nic": ""
+				}
+			],
+			"open": false
+		}
+	]
+}
