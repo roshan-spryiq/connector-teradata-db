@@ -17,21 +17,21 @@ class TeraDataDb(object):
         self.host_name = config.get('host_name')
         self.system_name = config.get('system_name')
         self.verify_ssl = config.get('verify_ssl')
-        self.db_name = config.get('db_name') 
+        self.db_user = config.get('db_user') 
         self.db_password = config.get('db_password') 
         self.jwt_token = config.get('jwt_token') 
         self.base_auth = None  
         self.jwt_auth = None  
         self.select_authentication = config.get('select_authentication')
-        if self.select_authentication == "Basic Authentication" and self.db_name is not None and self.db_password is not None:
-            self.base_auth = self.generate_basic_auth_header(self.db_name, self.db_password)
+        if self.select_authentication == "Basic Authentication" and self.db_user is not None and self.db_password is not None:
+            self.base_auth = self.generate_basic_auth_header(self.db_user, self.db_password)
         if  self.select_authentication == "JWT Authentication" and self.jwt_token is not None:
             self.jwt_auth = self.jwt_token
        
        
-    def generate_basic_auth_header(self, db_name, db_password):
+    def generate_basic_auth_header(self, db_user, db_password):
         
-        credentials = f"{db_name}:{db_password}"
+        credentials = f"{db_user}:{db_password}"
         credentials_b64 = base64.b64encode(credentials.encode('utf-8')).decode('utf-8')
         return f"Basic {credentials_b64}"
 
