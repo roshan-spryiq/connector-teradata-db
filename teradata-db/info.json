@@ -64,7 +64,7 @@
 						{
 							"title": "DB User ",
 							"description": "",
-						    "name":"db_name",
+						    "name":"db_user",
 							"required": false,
 							"editable": true,
 							"visible": true,
