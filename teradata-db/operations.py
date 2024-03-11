@@ -15,20 +15,21 @@ logger = get_logger('teradata-db')
 class TeraDataDb(object):
     def __init__(self,config):
         self.host_name = config.get('host_name')
-        self.system_name = config.get('system_name')
+        self.port = config.get('port')
         self.verify_ssl = config.get('verify_ssl')
+        
         self.db_user = config.get('db_user') 
         self.db_password = config.get('db_password') 
         self.jwt_token = config.get('jwt_token') 
         self.base_auth = None  
         self.jwt_auth = None  
+        
         self.select_authentication = config.get('select_authentication')
         if self.select_authentication == "Basic Authentication" and self.db_user is not None and self.db_password is not None:
             self.base_auth = self.generate_basic_auth_header(self.db_user, self.db_password)
         if  self.select_authentication == "JWT Authentication" and self.jwt_token is not None:
             self.jwt_auth = self.jwt_token
-       
-       
+           
     def generate_basic_auth_header(self, db_user, db_password):
         
         credentials = f"{db_user}:{db_password}"
@@ -36,7 +37,7 @@ class TeraDataDb(object):
         return f"Basic {credentials_b64}"
 
     def make_api_call(self, endpoint=None, method='GET', headers=None, health_check=False, data=None):
-        server_url = f'https://{self.host_name}/systems/{self.system_name}'
+        server_url = f'https://{self.host_name}:{self.port}/systems'
         if endpoint:    
             url = server_url + endpoint
         else:
@@ -46,9 +47,6 @@ class TeraDataDb(object):
             headers = {'Content-Type':'application/json', 'Authorization': self.jwt_auth}
         else:
             headers = {'Content-Type':'application/json', 'Authorization': self.base_auth}
-            
-            
-        
         logger.debug('Final url to make rest call is: {0}'.format(url))
 
         try:
@@ -81,14 +79,26 @@ def check_health(config):
     try:
         obj = TeraDataDb(config)
         obj.make_api_call(endpoint='/queries', health_check=True)
-        return True
+        return  obj.make_api_call(endpoint='/queries', health_check=True)
     except Exception as err:
         raise ConnectorError(err)
 
 
 
-def get_indicators_for_latest_feed(config, params):
-    pass
+def get_all_databases(config, params):
+    obj = TeraDataDb(config)
+    system_name = params.get('system_name')
+    endpoint = f'/{system_name}/databases'  
+    return obj.make_api_call(endpoint=endpoint)
+
+def get_single_database(config, params):
+    obj = TeraDataDb(config)
+    system_name = params.get('system_name')
+    database_name = params.get('database_name')
+    endpoint = f'/{system_name}/databases/{database_name}'
+    return obj.make_api_call(endpoint=endpoint)
+    
 operations = {
-    'get_indicators_for_latest_feed': get_indicators_for_latest_feed
+    'get_all_databases': get_all_databases,
+    'get_single_database': get_single_database
 }

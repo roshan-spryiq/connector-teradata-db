@@ -25,14 +25,14 @@
                 "placeholder": ""
             },
             {
-                "title": "System Name",
+                "title": "Port",
                 "required": true,
                 "editable": true,
                 "visible": true,
                 "type": "text",
-                "name": "system_name",
+                "name": "port",
                 "tooltip": "",
-                "value": "prod",
+                "value": "1443",
                 "description": ""
             },
 			{
@@ -101,12 +101,56 @@
     },
     "operations": [
         {
-            "title": "Get Indicators For Latest Feed ",
-            "operation": "get_indicators_for_latest_feed",
-            "description": "Retrieves a list of all indicators from openphish feed for last 15 minutes.",
-            "annotation": "get_indicators_for_latest_feed",
+            "title": "Get All Databases",
+            "operation": "get_all_databases",
+            "description": "",
+            "annotation": "get_all_databases",
             "category": "investigation",
-            "parameters":[]
-		}
+            "parameters":[
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "Enter Target System Name!",
+                    "value": "",
+                    "tooltip": "The name of the system for which all databases should be retrieved."
+                }
+            ]
+		},
+        {
+            "title": "Get Single database",
+            "operation": "get_single_database",
+            "description": "Retrieves a single database on a registered system",
+            "annotation": "get_single_database",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "Enter Target System Name!",
+                    "value": "",
+                    "tooltip": "Specify the name of the system for which all databases should be retrieved."
+                },
+                {
+                    "title": "Database Name",
+                    "type": "text",
+                    "name": "database_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "Enter Database Name!",
+                    "value": "",
+                    "tooltip": "Specify The name of the database to retrieve."
+                }
+            ]
+        }
+
     ]
 }
