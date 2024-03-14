@@ -1,0 +1,1158 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+      "@type": "WorkflowCollection",
+      "name": "Sample - Teradata DB - 1.0.0",
+      "description": "Teradata DB is one of the popular Relational Database Management System. It is mainly suitable for building large scale data warehousing applications. Teradata Query Service is a REST API for Vantage that you can use to run standard SQL statements without managing client-side drivers.",
+      "visible": true,
+      "image": null,
+      "recordTags": [
+        "Tearadata",
+        "tearadata-db"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "45f7a3ba-400a-463f-98fe-da8c93ea9581",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all database on a registered system.",
+          "name": "Get List Of All Databases",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/6944bb41-d04b-4fca-b1c1-84e8a560efc9",
+          "steps": [
+            {
+              "uuid": "6944bb41-d04b-4fca-b1c1-84e8a560efc9",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "2b8aef54-d480-4ef9-a88d-8cc355d83d4a",
+                "title": "Teradata DB: Get List Of All Databases",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "186980ca-cb50-4320-b6f1-e87add831708",
+              "@type": "WorkflowStep",
+              "name": "Get List Of All Databases",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": {
+                  "system_name": ""
+                },
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_list_of_all_databases",
+                "operationTitle": "Get List Of All Databases",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "7d073ba4-4700-4347-8b1c-8d9485f8edd2",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get List Of All Databases",
+              "sourceStep": "/api/3/workflow_steps/6944bb41-d04b-4fca-b1c1-84e8a560efc9",
+              "targetStep": "/api/3/workflow_steps/186980ca-cb50-4320-b6f1-e87add831708"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "71a37b28-7c51-4d85-bbd6-c8c1a46de0ae",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves specific database by name on a registered system.",
+          "name": "Get Specific Database By Name",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/61c81639-c14b-4e0a-9abc-982fb3eab3b7",
+          "steps": [
+            {
+              "uuid": "61c81639-c14b-4e0a-9abc-982fb3eab3b7",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "ddf30ac4-02e6-4ce7-a15c-be957dda798a",
+                "title": "Teradata DB: Get Specific Database By Name",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "f9916d24-ac91-474f-a1a9-b3ceecae85c2",
+              "@type": "WorkflowStep",
+              "name": "Get Specific Database By Name",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": {
+                  "database_name": ""
+                },
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_specific_database_by_name",
+                "operationTitle": "Get Specific Database By Name",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "2d2f5f4e-0e8d-409b-beed-7e16ef669872",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Specific Database By Name",
+              "sourceStep": "/api/3/workflow_steps/61c81639-c14b-4e0a-9abc-982fb3eab3b7",
+              "targetStep": "/api/3/workflow_steps/f9916d24-ac91-474f-a1a9-b3ceecae85c2"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "9a084190-b96c-4a6c-a63c-17a321225b8e",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all functions on a registered system.",
+          "name": "Get List Of All Functions",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/78043c6f-cfc5-4313-8df6-988434f35302",
+          "steps": [
+            {
+              "uuid": "78043c6f-cfc5-4313-8df6-988434f35302",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "8c8f1e31-5d6a-4e1c-a2b6-245d3593fc61",
+                "title": "Teradata DB: Get List Of All Functions",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "28141899-e49e-4c8c-830a-8a17eab3b8c2",
+              "@type": "WorkflowStep",
+              "name": "Get List Of All Functions",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_list_of_all_functions",
+                "operationTitle": "Get List Of All Functions",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "e5b3ad1a-6236-4789-8f77-557ebe6977e8",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get List Of All Functions",
+              "sourceStep": "/api/3/workflow_steps/78043c6f-cfc5-4313-8df6-988434f35302",
+              "targetStep": "/api/3/workflow_steps/28141899-e49e-4c8c-830a-8a17eab3b8c2"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "a55f12cf-4a77-4f07-8cd2-f8e05458205e",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all macros on a registered system.",
+          "name": "Get List Of All Macros",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/57fae6aa-79fa-4103-888e-244d44a26981",
+          "steps": [
+            {
+              "uuid": "57fae6aa-79fa-4103-888e-244d44a26981",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "5909fdc0-70ad-42d5-ab1f-fa5cf82600dd",
+                "title": "Teradata DB: Get List Of All Macros",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "20a7aa6e-5867-4411-b86d-b0df8e846635",
+              "@type": "WorkflowStep",
+              "name": "Get List Of All Macros",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_list_of_all_macros",
+                "operationTitle": "Get List Of All Macros",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "18afe248-510e-428f-a883-dedb88aced75",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get List Of All Macros",
+              "sourceStep": "/api/3/workflow_steps/57fae6aa-79fa-4103-888e-244d44a26981",
+              "targetStep": "/api/3/workflow_steps/20a7aa6e-5867-4411-b86d-b0df8e846635"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "ee31e9e1-0369-4385-831d-722bcefb7d38",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all procedures on a registered system.",
+          "name": "Get List Of All Procedures",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e68486a0-2c63-4c43-b605-9e9b7cff42e9",
+          "steps": [
+            {
+              "uuid": "e68486a0-2c63-4c43-b605-9e9b7cff42e9",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "2c4f2a71-2e75-421a-9905-62d294e64ca8",
+                "title": "Teradata DB: Get List Of All Procedures",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "6ede514b-b0db-4f1a-9e1d-285c8c051bd0",
+              "@type": "WorkflowStep",
+              "name": "Get List Of All Procedures",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_list_of_all_procedures",
+                "operationTitle": "Get List Of All Procedures",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "6f7c6120-f7a7-4525-992f-0483cfc38398",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get List Of All Procedures",
+              "sourceStep": "/api/3/workflow_steps/e68486a0-2c63-4c43-b605-9e9b7cff42e9",
+              "targetStep": "/api/3/workflow_steps/6ede514b-b0db-4f1a-9e1d-285c8c051bd0"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "7476c58b-9ea3-4b3c-a99f-61d243c5c1c2",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all tables on a registered system.",
+          "name": "Get List Of All Tables",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/91eaae7e-f418-46fe-a73c-17b62290bc6a",
+          "steps": [
+            {
+              "uuid": "91eaae7e-f418-46fe-a73c-17b62290bc6a",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "450c0363-fb34-44aa-a684-067798b34089",
+                "title": "Teradata DB: Get List Of All Tables",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "5d8402df-bbd8-4ecd-93ae-332dc9a11efc",
+              "@type": "WorkflowStep",
+              "name": "Get List Of All Tables",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_list_of_all_tables",
+                "operationTitle": "Get List Of All Tables",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "2240b530-ccec-4a5e-a436-d79f2c4a66c2",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get List Of All Tables",
+              "sourceStep": "/api/3/workflow_steps/91eaae7e-f418-46fe-a73c-17b62290bc6a",
+              "targetStep": "/api/3/workflow_steps/5d8402df-bbd8-4ecd-93ae-332dc9a11efc"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "0fead664-3d49-4a84-b2f6-c5475566a1e8",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves specific table by name on a registered system.",
+          "name": "Get Specific Table By Name",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/044626a6-f36a-4457-aa6a-449d9787954f",
+          "steps": [
+            {
+              "uuid": "044626a6-f36a-4457-aa6a-449d9787954f",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "c2cfc684-7fbe-490d-9d30-87fddc87d69f",
+                "title": "Teradata DB: Get Specific Table By Name",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "ea3aaf8c-7898-49c0-921e-b7e63c6fa516",
+              "@type": "WorkflowStep",
+              "name": "Get Specific Table By Name",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_specific_table_by_name",
+                "operationTitle": "Get Specific Table By Name",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "156f57bc-24ff-4276-bf03-491b63219a14",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Specific Table By Name",
+              "sourceStep": "/api/3/workflow_steps/044626a6-f36a-4457-aa6a-449d9787954f",
+              "targetStep": "/api/3/workflow_steps/ea3aaf8c-7898-49c0-921e-b7e63c6fa516"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "3273746a-ae8d-46fb-a997-aea592dadc57",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all views on a registered system.",
+          "name": "Get List Of All Views",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a39cefeb-141c-4df1-8586-e1bd46cefa2a",
+          "steps": [
+            {
+              "uuid": "a39cefeb-141c-4df1-8586-e1bd46cefa2a",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "a00da44e-336e-42d5-b6b9-4a39993abb1a",
+                "title": "Teradata DB: Get List Of All Views",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "6c68edbf-9f70-442c-96e5-78ced94a6e5e",
+              "@type": "WorkflowStep",
+              "name": "Get List Of All Views",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_list_of_all_views",
+                "operationTitle": "Get List Of All Views",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "952b181b-577c-4dcd-ba5f-e7393b84223c",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get List Of All Views",
+              "sourceStep": "/api/3/workflow_steps/a39cefeb-141c-4df1-8586-e1bd46cefa2a",
+              "targetStep": "/api/3/workflow_steps/6c68edbf-9f70-442c-96e5-78ced94a6e5e"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "fc5ac2d9-973e-4c23-92ec-a7e0bc5b5e8f",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves specific view by name on a registered system.",
+          "name": "Get Specific View By Name",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/cc8bdfc1-c8f8-46cb-a981-fd7a04083ef6",
+          "steps": [
+            {
+              "uuid": "cc8bdfc1-c8f8-46cb-a981-fd7a04083ef6",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "90ba0814-4d51-40d4-aa50-8ec42e7dd54e",
+                "title": "Teradata DB: Get Specific View By Name",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "7548179a-5765-4c75-84bb-153a530b37ae",
+              "@type": "WorkflowStep",
+              "name": "Get Specific View By Name",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": {
+                  "database_name": "",
+                  "view_name": ""
+                },
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_specific_view_by_name",
+                "operationTitle": "Get Specific View By Name",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "7c384250-4265-405e-80f8-1342c348f713",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Specific View By Name",
+              "sourceStep": "/api/3/workflow_steps/cc8bdfc1-c8f8-46cb-a981-fd7a04083ef6",
+              "targetStep": "/api/3/workflow_steps/7548179a-5765-4c75-84bb-153a530b37ae"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "d04865a1-0240-4442-af5d-e4afae0c5746",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all queries on a registered system.",
+          "name": "Get List Of All Queries",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/cc1bf953-1c8c-46d7-a08e-668b4c889a76",
+          "steps": [
+            {
+              "uuid": "cc1bf953-1c8c-46d7-a08e-668b4c889a76",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "08b8c3ed-4c19-4db9-9ace-e1bce8390147",
+                "title": "Teradata DB: Get List Of All Queries",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "4c8474c6-fba0-4360-9e31-1b47b5daf31c",
+              "@type": "WorkflowStep",
+              "name": "Get List Of All Queries",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": {
+                  "system_name": "",
+                  "session": "",
+                  "state": "",
+                  "clientId": ""
+                },
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_list_of_all_queries",
+                "operationTitle": "Get List Of All Queries",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "4addb971-5e2d-4e1a-8c23-a15828434094",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get List Of All Queries",
+              "sourceStep": "/api/3/workflow_steps/cc1bf953-1c8c-46d7-a08e-668b4c889a76",
+              "targetStep": "/api/3/workflow_steps/4c8474c6-fba0-4360-9e31-1b47b5daf31c"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "3ceee1d6-2487-43ed-b473-64fd3b358aaa",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Submit a query to a registered system.",
+          "name": "Submit A Query",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/501190d0-e22c-4b2a-be1f-b12f13732742",
+          "steps": [
+            {
+              "uuid": "501190d0-e22c-4b2a-be1f-b12f13732742",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "3a7a7029-e096-4e65-8537-1e22860b2ee8",
+                "title": "Teradata DB: Submit A Query",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "a3c0f6f8-5d12-4db9-a250-7ed29a21a9f4",
+              "@type": "WorkflowStep",
+              "name": "Submit A Query",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": {
+                  "query_request": ""
+                },
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "submit_a_query",
+                "operationTitle": "Submit A Query",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "6b1b9384-b09e-45a2-af0b-25041ee42c16",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Submit A Query",
+              "sourceStep": "/api/3/workflow_steps/501190d0-e22c-4b2a-be1f-b12f13732742",
+              "targetStep": "/api/3/workflow_steps/a3c0f6f8-5d12-4db9-a250-7ed29a21a9f4"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "48fa982b-0bdb-4788-bbc6-e87d6fb28165",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves specific query by id on a registered system.",
+          "name": "Get Query By Id",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/de91d501-e3a2-48b5-88e9-d6b601718d21",
+          "steps": [
+            {
+              "uuid": "de91d501-e3a2-48b5-88e9-d6b601718d21",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "ae9ba4fa-3c32-484c-8b00-453c46d4839d",
+                "title": "Teradata DB: Get Query By Id",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "0d1840bf-c99c-4e78-8ae4-eaa385091a12",
+              "@type": "WorkflowStep",
+              "name": "Get Query By Id",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": {
+                  "id": ""
+                },
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_query_by_id",
+                "operationTitle": "Get Query By Id",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "8b2d0a7a-d22d-4e16-be8b-1f47d39fce1d",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Query By Id",
+              "sourceStep": "/api/3/workflow_steps/de91d501-e3a2-48b5-88e9-d6b601718d21",
+              "targetStep": "/api/3/workflow_steps/0d1840bf-c99c-4e78-8ae4-eaa385091a12"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "65eb3775-8fbf-4641-a7ca-ef4541cd1157",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves results by id on a registered system.",
+          "name": "Get Query Results By ID",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/b88b32d1-80c5-45ac-b3f2-97e2a48522f2",
+          "steps": [
+            {
+              "uuid": "b88b32d1-80c5-45ac-b3f2-97e2a48522f2",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "0af0cc21-1971-4a77-b672-9ab3f6ee68d7",
+                "title": "Teradata DB: Get Query Results By ID",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "944787f1-c417-4831-80d0-043fb4a73503",
+              "@type": "WorkflowStep",
+              "name": "Get Query Results By ID",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": {
+                  "row_offset": "",
+                  "row_limit": ""
+                },
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_query_results_by_id",
+                "operationTitle": "Get Query Results By ID",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "00c0e6e5-5c65-470f-b823-2041fc9589f5",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Query Results By ID",
+              "sourceStep": "/api/3/workflow_steps/b88b32d1-80c5-45ac-b3f2-97e2a48522f2",
+              "targetStep": "/api/3/workflow_steps/944787f1-c417-4831-80d0-043fb4a73503"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "d576731a-40ee-421a-917b-201bc0dca5af",
+          "collection": "/api/3/workflow_collections/b85e087c-58c4-4a34-9d56-29e9f3f91e48",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all systems on a registered system.",
+          "name": "Get List Of All Systems",
+          "tag": "#Teradata DB",
+          "recordTags": [
+            "Tearadata",
+            "tearadata-db"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d2aa33b6-0871-4e8b-9e64-140cf9b92ba1",
+          "steps": [
+            {
+              "uuid": "d2aa33b6-0871-4e8b-9e64-140cf9b92ba1",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "7a3313d6-8524-4fd4-9fde-60dd366e8270",
+                "title": "Teradata DB: Get List Of All Systems",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "ab1ba773-8cdd-4494-a786-5563365d8646",
+              "@type": "WorkflowStep",
+              "name": "Get List Of All Systems",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Teradata DB",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "tearadata-db",
+                "operation": "get_list_of_all_systems",
+                "operationTitle": "Get List Of All Systems",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d43d9c3e-fdd7-4e41-abf7-9f9f4612ad97",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get List Of All Systems",
+              "sourceStep": "/api/3/workflow_steps/d2aa33b6-0871-4e8b-9e64-140cf9b92ba1",
+              "targetStep": "/api/3/workflow_steps/ab1ba773-8cdd-4494-a786-5563365d8646"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
