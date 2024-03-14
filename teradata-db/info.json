@@ -2,7 +2,7 @@
     "name": "tearadata-db",
     "version": "1.0.0",
     "label": "Teradata DB",
-    "description": "",
+    "description": "Teradata DB is one of the popular Relational Database Management System. It is mainly suitable for building large scale data warehousing applications. Teradata Query Service is a REST API for Vantage that you can use to run standard SQL statements without managing client-side drivers.",
     "publisher": "spryIQ.co",
     "icon_small_name": "small.png",
     "icon_large_name": "large.png",
@@ -15,27 +15,28 @@
             {
                 "title": "Host Name",
                 "type": "text",
-                "description": "",
-                "tooltip": "",
                 "name": "host_name",
                 "required": true,
                 "visible": true,
                 "editable": true,
-                "value": "teradata",
-                "placeholder": ""
+                "value": "",
+                "placeholder": "eg: https://clearscape.teradata.com or clearscape.teradata.com",
+                "description": "Host name where Query Service is installed.",
+                "tooltip": "Host name where Query Service is installed."
             },
             {
-                "title": "System Name",
+                "title": "Port",
                 "required": true,
                 "editable": true,
                 "visible": true,
                 "type": "text",
-                "name": "system_name",
-                "tooltip": "",
-                "value": "prod",
-                "description": ""
+                "name": "port",
+                "placeholder": "Defualt port 1443.",
+                "tooltip": "Specify port number for the server. By default  port is 1443.",
+                "value": "1443",
+                "description": "Specify port number for the server. By default port is 1443."
             },
-			{
+            {
                 "title": "Verify SSL",
                 "type": "checkbox",
                 "name": "verify_ssl",
@@ -43,70 +44,654 @@
                 "visible": true,
                 "editable": true,
                 "description": "Specifies whether the SSL certificate for the server is to be verified or not.By default, this option is set as True.",
-                "value": true
+                "value": false
             },
             {
                 "title": "Select Authentication",
                 "required": true,
                 "editable": true,
                 "visible": true,
-				"name":"select_authentication",
+                "name": "select_authentication",
                 "type": "select",
                 "value": "Basic Authentication",
-                "tooltip": "",
-                "description": "",
-				"options": [
-					"Basic Authentication",
-					"JWT Authentication"					
-				],
-				"onchange": {
-					"Basic Authentication": [
-						{
-							"title": "DB User ",
-							"description": "",
-						    "name":"db_user",
-							"required": false,
-							"editable": true,
-							"visible": true,
-							"type": "text",
-							"value": "jitesh"
-						},
-						{
-							"title": "DB Password ",
-							"description": "",
-							"name":"db_password",
-							"required": false,
-							"editable": true,
-							"visible": true,
-							"type": "password",
-
-							"value": "jitesh"
-						}
-					],
-					"JWT Authentication": [
-						{
-							"title": "JWT Token",
-							"description": "",
-							"required": false,
-							"editable": true,
-							"visible": true,
-							"type": "password",
-							"name": "jwt_token",
-							"value": "sdada"
-						}
-					]
-				}
+                "tooltip": "Provide valid credentials to access the target Analytics Database using HTTP Basic or JWT authentication.",
+                "description": "Provide valid credentials to access the target Analytics Database using HTTP Basic or JWT authentication.",
+                "options": [
+                    "Basic Authentication",
+                    "JWT Authentication"
+                ],
+                "onchange": {
+                    "Basic Authentication": [
+                        {
+                            "title": "DB User ",
+                            "name": "db_user",
+                            "required": true,
+                            "editable": true,
+                            "visible": true,
+                            "type": "text",
+                            "value": "",
+                            "placeholder": "e.g. dbc",
+                            "tooltip": "Specify database username.",
+                            "description": "Specify database username."
+                        },
+                        {
+                            "title": "DB Password ",
+                            "name": "db_password",
+                            "required": true,
+                            "editable": true,
+                            "visible": true,
+                            "type": "password",
+                            "value": "",
+                            "placeholder": "e.g. dbc",
+                            "tooltip": "Specify database password.",
+                            "description": "Specify database password."
+                        }
+                    ],
+                    "JWT Authentication": [
+                        {
+                            "title": "JWT Token",
+                            "required": true,
+                            "editable": true,
+                            "visible": true,
+                            "type": "password",
+                            "name": "jwt_token",
+                            "value": "",
+                            "placeholder": "e.g. eZakdgdfdhsfdsafdfdf",
+                            "tooltip": "Specify JWT bearer token.",
+                            "description": "Specify JWT bearer token."
+                        }
+                    ]
+                }
             }
         ]
     },
     "operations": [
         {
-            "title": "Get Indicators For Latest Feed ",
-            "operation": "get_indicators_for_latest_feed",
-            "description": "Retrieves a list of all indicators from openphish feed for last 15 minutes.",
-            "annotation": "get_indicators_for_latest_feed",
+            "title": "Get List Of All Databases",
+            "operation": "get_list_of_all_databases",
+            "annotation": "get_list_of_all_databases",
+            "tooltip": "Retrieves a list of all database on a registered system.",
+            "description": "Retrieves a list of all database on a registered system.",
             "category": "investigation",
-            "parameters":[]
-		}
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "tooltip": "Specify the name of the system for which all databases should be retrieved.",
+                    "placeholder": "e.g. local",
+                    "description": "The name of the system for which all databases should be retrieved."
+                }
+            ],
+            "output_schema": [
+                {
+                "db_kind": "",
+                "name": "",
+                "system": ""
+                }
+            ]
+        },
+        {
+            "title": "Get Specific Database By Name",
+            "operation": "get_specific_database_by_name",
+            "annotation": "get_specific_database_by_name",
+            "tooltip": "Retrieves specific database by name on a registered system.",
+            "description": "Retrieves specific database by name on a registered system.",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system for which all databases should be retrieved.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system for which all databases should be retrieved."
+                },
+                {
+                    "title": "Database Name",
+                    "type": "text",
+                    "name": "database_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "placeholder": "eg: dbc",
+                    "tooltip": "Specify the name of the database to retrieve.",
+                    "description": "Specify the name of the database to retrieve."
+                }
+            ],
+            "output_schema": [
+                {
+                "db_kind": "",
+                "name": "",
+                "system": ""
+                }
+            ]
+        },
+        {
+            "title": "Get List Of All Functions",
+            "operation": "get_list_of_all_functions",
+            "description": "Retrieves a list of all functions on a registered system.",
+            "tooltip": "Retrieves a list of all functions on a registered system.",
+            "annotation": "get_list_of_all_functions",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "Database Name",
+                    "type": "text",
+                    "name": "database_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "eg: dbc",
+                    "tooltip": "Specify the name of the database on the specified system for which all functions should be retrieved.",
+                    "description": "Specify the name of the database on the specified system for which all functions should be retrieved."
+                }
+            ],
+            "output_schema": [ ]
+        },
+        {
+            "title": "Get List Of All Macros",
+            "operation": "get_list_of_all_macros",
+            "description": "Retrieves a list of all macros on a registered system.",
+            "tooltip": "Retrieves a list of all macros on a registered system.",
+            "annotation": "get_list_of_all_macros",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "Database Name",
+                    "type": "text",
+                    "name": "database_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "eg: dbc",
+                    "tooltip": "Specify the name of the database on the specified system for which all macros should be retrieved.",
+                    "description": "Specify the name of the database on the specified system for which all macros should be retrieved."
+                }
+            ],
+            "output_schema": [ ]
+        },
+        {
+            "title": "Get List Of All Procedures",
+            "operation": "get_list_of_all_procedures",
+            "description": "Retrieves a list of all procedures on a registered system.",
+            "tooltip": "Retrieves a list of all procedures on a registered system.",
+            "annotation": "get_list_of_all_procedures",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "Database Name",
+                    "type": "text",
+                    "name": "database_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "eg: dbc",
+                    "tooltip": "Specify the name of the database on the specified system for which all macros should be retrieved.",
+                    "description": "Specify the name of the database on the specified system for which all macros should be retrieved."
+                }
+            ],
+            "output_schema": [ ]
+        },
+        {
+            "title": "Get List Of All Tables",
+            "operation": "get_list_of_all_tables",
+            "description": "Retrieves a list of all tables on a registered system.",
+            "tooltip": "Retrieves a list of all tables on a registered system.",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "Database Name",
+                    "type": "text",
+                    "name": "database_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "eg: dbc",
+                    "tooltip": "Specify the name of the database to retrieve.",
+                    "description": "Specify the name of the database to retrieve."
+                }
+            ],
+            "output_schema": [ ]
+        },
+        {
+            "title": "Get Specific Table By Name",
+            "operation": "get_specific_table_by_name",
+            "tooltip": "Retrieves specific table by name on a registered system.",
+            "description": "Retrieves specific table by name on a registered system.",
+            "annotation": "get_specific_table_by_name",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "Database Name",
+                    "type": "text",
+                    "name": "database_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "eg: dbc",
+                    "tooltip": "Specify the name of the database to retrieve.",
+                    "description": "Specify the name of the database to retrieve."
+                },
+                {
+                    "title": "Table Name",
+                    "type": "text",
+                    "name": "table_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "eg: All",
+                    "tooltip": "Specify the name of the table to retrieve.",
+                    "description": "Specify the name of the table to retrieve."
+                }
+            ],
+            "output_schema": [ ]
+        },
+        {
+            "title": "Get List Of All Views",
+            "operation": "get_list_of_all_views",
+            "description": "Retrieves a list of all views on a registered system.",
+            "tooltip": "Retrieves a list of all views on a registered system.",
+            "annotation": "get_list_of_all_views",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "Database Name",
+                    "type": "text",
+                    "name": "database_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "eg: dbc",
+                    "tooltip": "Specify the name of the database to retrieve.",
+                    "description": "Specify the name of the database to retrieve."
+                }
+            ],
+            "output_schema": [ ]
+        },
+        {
+            "title": "Get Specific View By Name",
+            "operation": "get_specific_view_by_name",
+            "tooltip": "Retrieves specific view by name on a registered system.",
+            "description": "Retrieves specific view by name on a registered system.",
+            "annotation": "get_specific_view_by_name",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "Database Name",
+                    "type": "text",
+                    "name": "database_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "placeholder": "eg: dbc",
+                    "tooltip": "Specify the name of the database to retrieve.",
+                    "description": "Specify the name of the database to retrieve."
+                },
+                {
+                    "title": "View Name",
+                    "type": "text",
+                    "name": "view_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "placeholder": "eg: All",
+                    "tooltip": "Specify the name of the view to retrieve.",
+                    "description": "Specify the name of the view to retrieve."
+                }
+            ],
+            "output_schema": [ ]
+        },
+        {
+            "title": "Get List Of All Queries",
+            "operation": "get_list_of_all_queries",
+            "description": "Retrieves a list of all queries on a registered system.",
+            "tooltip": "Retrieves a list of all queries on a registered system.",
+            "annotation": "get_list_of_all_queries",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "Session",
+                    "type": "text",
+                    "name": "session",
+                    "required": false,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "placeholder": "eg: 31",
+                    "tooltip": "Specify the session number for which all queries should be retrieved.",
+                    "description": "Specify the session number for which all queries should be retrieved."
+                },
+                {
+                    "title": "State",
+                    "type": "select",
+                    "name": "state",
+                    "required": false,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "placeholder": "--",
+                    "tooltip": "Specify a QueryState value that will be used to filter the results.",
+                    "description": "Specify a QueryState value that will be used to filter the results.",
+                    "options": [
+                        "QUEUED",
+                        "PENDING",
+                        "SUBMITTED",
+                        "RESPONDING",
+                        "SPOOLING",
+                        "RESULT_SET_READY"
+                    ]
+                },
+                {
+                    "title": "Client ID",
+                    "type": "text",
+                    "name": "clientId",
+                    "required": false,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "placeholder": "eg: 2321",
+                    "tooltip": "Specify a client ID that will be used to filter the results.",
+                    "description": "Specify a client ID that will be used to filter the results."
+                }
+            ],
+            "output_schema": [ 
+                {
+                    "batch": "",
+                    "client_id": "",
+                    "params": [],
+                    "query": "",
+                    "query_bands": 
+                        {
+                            "app": ""
+                        },
+                    "query_duration": "",
+                    "query_id": "",
+                    "query_state": "",
+                    "query_timeout": "",
+                    "queue_order": "",
+                    "queue_duration": "",
+                    "queue_timeout": "",
+                    "session": "",
+                    "status_code": "",
+                    "system": "",
+                    "user": ""
+                }
+            ]
+        },
+        {
+            "title": "Submit A Query",
+            "operation": "submit_a_query",
+            "description": "Submit a query to a registered system.",
+            "tooltip": "Submit a query to a registered system.",
+            "annotation": "Submit_a_query",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "Query Request",
+                    "type": "textarea",
+                    "name": "query_request",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "placeholder": "eg: {'batch':true ,'client_id':'string', 'query':'select * from dbc.db'}",
+                    "tooltip": "Specify the details of the query to submit to the database.",
+                    "description": "Specify the details of the query to submit to the database."
+                }
+            ],
+            "output_schema": [ ]
+        },
+        {
+            "title": "Get Query By Id",
+            "operation": "get_query_by_id",
+            "tooltip": "Retrieves specific query by id on a registered system.",
+            "description": "Retrieves specific query by id on a registered system.",
+            "annotation": "get_query_by_id   ",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "ID",
+                    "type": "integer",
+                    "name": "id",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "placeholder": "eg: 1",
+                    "tooltip": "Specify The ID of the query to retrieve.",
+                    "description": "Specify The ID of the query to retrieve."
+                }
+            ],
+            "output_schema": [ 
+                {
+                    "batch": "",
+                    "client_id": "",
+                    "params": [],
+                    "query": "",
+                    "query_bands": 
+                        {
+                            "app": ""
+                        },
+                    "query_duration": "",
+                    "query_id": "",
+                    "query_state": "",
+                    "query_timeout": "",
+                    "queue_order": "",
+                    "queue_duration": "",
+                    "queue_timeout": "",
+                    "session": "",
+                    "status_code": "",
+                    "system": "",
+                    "user": ""
+                }
+            ]
+
+        },
+        {
+            "title": "Get Query Results By ID",
+            "operation": "get_query_results_by_id",
+            "description": "Retrieves results by id on a registered system.",
+            "tooltip": "Retrieves results by id on a registered system.",
+            "annotation": "get_query_results_by_id",
+            "category": "investigation",
+            "parameters": [
+                {
+                    "title": "System Name",
+                    "type": "text",
+                    "name": "system_name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Specify the name of the system on which the database resides.",
+                    "placeholder": "e.g. local",
+                    "description": "Specify the name of the system on which the database resides."
+                },
+                {
+                    "title": "ID",
+                    "type": "integer",
+                    "name": "id",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "placeholder": "eg: 1",
+                    "tooltip": "Specify The ID of the query to retrieve.",
+                    "description": "Specify The ID of the query to retrieve."
+                },
+                {
+                    "title": "Row Offset",
+                    "type": "integer",
+                    "name": "row_offset",
+                    "required": false,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "placeholder": "eg: 1",
+                    "tooltip": "Specify the number of rows by which the returned results should be offset.",
+                    "description": "Specify the number of rows by which the returned results should be offset."
+                },
+                {
+                    "title": "Row Limit",
+                    "type": "integer",
+                    "name": "row_limit",
+                    "required": false,
+                    "visible": true,
+                    "editable": true,
+                    "value": "",
+                    "placeholder": "eg: 2",
+                    "tooltip": "Specify the maximum number of rows that should be present in the returned results",
+                    "description": "Specify the maximum number of rows that should be present in the returned results"
+                }
+            ],
+            "output_schema": [ ]
+        },
+        {
+            "title": "Get List Of All Systems",
+            "operation": "get_list_of_all_systems",
+            "description": "Retrieves a list of all systems on a registered system.",
+            "tooltip": "Retrieves a list of all systems on a registered system.",
+            "annotation": "get_list_of_all_systems   ",
+            "category": "investigation",
+            "parameters": [],
+            "output_schema": [ 
+                {
+                    "systemType": "",
+                    "name": "",
+                    "host": "",
+                    "logMech": "",
+                    "encryptData": "",
+                    "defaultCharSet": "",
+                    "useXViews": "",
+                    "maxIdleSeconds": "",
+                    "defaultTransactionMode": "",
+                    "defaultDatabase": "",
+                    "maxImplicitSessionsPerUser": "",
+                    "maxExplicitSessionsPerUser": "",
+                    "maxQueuedRequestsPerUser": "",
+                    "includeUsersInList": ""
+                }
+            ]
+        }
     ]
 }

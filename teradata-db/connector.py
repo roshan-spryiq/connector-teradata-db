@@ -5,7 +5,7 @@
   Copyright end """
 
 from connectors.core.connector import Connector, get_logger, ConnectorError
-from .operations import check_health, operations
+from .operations import _check_health, operations
 logger = get_logger('teradata-db')
 
 
@@ -21,4 +21,4 @@ class TeraDataDb(Connector):
             raise ConnectorError(str(err))
 
     def check_health(self, config):
-        return check_health(config)
+        return _check_health(config)
